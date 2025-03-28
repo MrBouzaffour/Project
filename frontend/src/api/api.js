@@ -1,17 +1,31 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: 'http://localhost:5000',
-  withCredentials: true,
+const API = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
+// Auth
 export const loginUser = (email, password) =>
-  instance.post('/login', { email, password });
+  API.post('/auth/login', { email, password });
 
 export const registerUser = (name, email, password) =>
-  instance.post('/register', { name, email, password });
+  API.post('/auth/register', { name, email, password });
 
-export const fetchUserProfile = () =>
-  instance.get('/profile');
+// Profile
+export const fetchUserProfile = (token) =>
+  API.get('/auth/profile', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
-export default instance;
+// Channels
+export const fetchChannels = () => API.get('/channels');
+export const createChannel = (name) => API.post('/channels', { name });
+
+// Messages / Replies (using FormData for file uploads)
+export const postMessage = (formData) => API.post('/messages', formData);
+export const postReply = (formData) => API.post('/replies', formData);
+
+// All Data (optional fallback)
+export const fetchAllData = () => API.get('/alldata');
+
+export default API;

@@ -16,7 +16,7 @@ const HomePage = () => {
     } else {
       fetchChannels();
     }
-  }, [user]);
+}, [user, navigate]);
 
   const fetchChannels = async () => {
     try {
