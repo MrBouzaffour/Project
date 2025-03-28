@@ -1,64 +1,49 @@
 const express = require('express');
 const cors = require('cors');
-const morgan = require('morgan');
-
-//routes
-
-
-
-//const { handleError } = require('./utils/errorHandler');
-//const authMiddleware = require('./middlewares/authMiddleware');
-
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 const app = express();
-require('dotenv').config();
+const channelRoutes = require('./routes/channelRoutes');
+const getDB = require('./models/couch');
+const dbName = 'channeltool';
+const port = 5000;
 
 app.use(cors());
-app.use(express.json()); // for JSON body parsing
-app.use(morgan('combined')); // Log detailed request information
+app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Logging middleware to capture API endpoint, request body, and headers
-app.use((req, res, next) => {
-    console.log(`Request to: ${req.method} ${req.originalUrl}`);
-    console.log('Headers:', req.headers);
-    console.log('Body:', req.body);
-    next();
+const upload = multer({ dest: path.join(__dirname, 'uploads') });
+
+app.use('/channels', channelRoutes);
+
+app.post('/messages', upload.single('screenshot'), async (req, res) => {
+  const { channelId, topic, data } = req.body;
+  const screenshot = req.file ? `/uploads/${req.file.filename}` : null;
+  const db = await getDB();
+  const doc = { type: 'message', channelId, topic, data, screenshot, timestamp: new Date().toISOString() };
+  const result = await db.insert(doc);
+  res.json(result);
 });
 
-// Middleware to handle JSON parse errors in request body
-app.use((err, req, res, next) => {
-    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-        console.error('Bad JSON format:', err.message);
-        return res.status(400).json({ error: 'Invalid JSON format' });
-    }
-    next();
+app.post('/replies', upload.single('screenshot'), async (req, res) => {
+  const { parentId, data } = req.body;
+  const screenshot = req.file ? `/uploads/${req.file.filename}` : null;
+  const db = await getDB();
+  const doc = { type: 'reply', parentId, data, screenshot, timestamp: new Date().toISOString() };
+  const result = await db.insert(doc);
+  res.json(result);
 });
-/*
-// login and register doesn't require authMiddleware
-app.use('/api/users', userRoutes);
 
-// Protected routes: Apply authMiddleware
-app.use('/api/calendars', authMiddleware, calendarRoutes); 
-app.use('/api/friends', authMiddleware, friendRoutes);
-app.use('/api/groups', authMiddleware, groupRoutes);
-app.use('/api/chat', authMiddleware, chatRoutes);
-//app.use('/api/notifications', authMiddleware, notificationRoutes);
-*/
-// Error Handling Middleware 
-//app.use(handleError);
+app.get('/alldata', async (req, res) => {
+  const db = await getDB();
+  const result = await db.list({ include_docs: true });
+  const docs = result.rows.map(r => r.doc);
+  res.json({
+    channels: docs.filter(d => d.type === 'channel'),
+    messages: docs.filter(d => d.type === 'message'),
+    replies: docs.filter(d => d.type === 'reply'),
+  });
+});
 
-// Start the server if this file is run directly
-if (require.main === module) {
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-
-    // Graceful shutdown
-    process.on('SIGTERM', () => {
-        console.log('Server terminated');
-        process.exit(0);
-    });
-}
-
-// Export the app for testing
-module.exports = app;
+app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
