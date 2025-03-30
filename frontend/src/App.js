@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -12,19 +13,18 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import Navbar from './components/Navbar';
+import ChannelPage from './pages/ChannelPage';
+import ThreadPage from './pages/ThreadPage';
+import './styles/styles.css';
 
-// PrivateRoute to protect certain routes
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
   return user ? children : <Navigate to="/login" />;
 };
 
-// Routes component with Navbar conditionally rendered
 const AppRoutes = () => {
   const location = useLocation();
- // const { user } = useAuth();
-
-  // List of paths where the Navbar should be hidden
+  const { user } = useAuth();
   const hideNavbarOn = ['/', '/login', '/register'];
   const shouldShowNavbar = !hideNavbarOn.includes(location.pathname);
 
@@ -33,8 +33,16 @@ const AppRoutes = () => {
       {shouldShowNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/register"
+          element={user ? <Navigate to="/home" /> : <RegisterPage />}
+        />
+        <Route
+          path="/login"
+          element={user ? <Navigate to="/home" /> : <LoginPage />}
+        />
+
         <Route
           path="/home"
           element={
@@ -43,13 +51,31 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/channel/:id"
+          element={
+            <PrivateRoute>
+              <ChannelPage />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/thread/:id"
+          element={
+            <PrivateRoute>
+              <ThreadPage />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );
 };
 
-// Wrap everything in Router and AuthProvider
 const App = () => {
   return (
     <AuthProvider>

@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const channelController = require('../controllers/channelController');
+const {
+  getAllChannels,
+  createChannel,
+} = require('../controllers/channelController'); 
 
-router.post('/', channelController.createChannel);
-router.get('/', channelController.getAllChannels);
+router.get('/', getAllChannels); 
+router.post('/', createChannel);
 
 module.exports = router;

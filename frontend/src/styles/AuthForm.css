@@ -36,4 +36,16 @@
   .auth-form button:hover {
     background-color: #0056b3;
   }
+  .alert {
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .alert.error {
+    background-color: #ffe0e0;
+    color: #b30000;
+  }
+  .alert.success {
+    background-color: #e0ffe5;
+    color: #008000;
+  }
   

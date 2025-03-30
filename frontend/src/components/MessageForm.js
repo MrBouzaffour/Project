@@ -26,22 +26,22 @@ const MessageForm = ({ channelId, onMessageSent }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 mb-4">
+    <form onSubmit={handleSubmit} className="message-form">
       <input
         type="text"
         placeholder="Topic"
         value={topic}
         onChange={(e) => setTopic(e.target.value)}
-        className="w-full p-2 border rounded"
+        className="input"
       />
       <textarea
         placeholder="Message..."
         value={data}
         onChange={(e) => setData(e.target.value)}
-        className="w-full p-2 border rounded"
+        className="textarea"
       ></textarea>
-      <input type="file" onChange={(e) => setScreenshot(e.target.files[0])} className="w-full" />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Post</button>
+      <input type="file" onChange={(e) => setScreenshot(e.target.files[0])} className="file" />
+      <button type="submit" className="btn-submit">Post</button>
     </form>
   );
 };

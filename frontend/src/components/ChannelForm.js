@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../api/api';
+import { createChannel } from '../api/api';
 
 const ChannelForm = ({ onChannelCreated }) => {
   const [name, setName] = useState('');
@@ -9,7 +9,7 @@ const ChannelForm = ({ onChannelCreated }) => {
     if (!name.trim()) return;
 
     try {
-      const res = await axios.post('/channels', { name });
+      const res = await createChannel(name); 
       onChannelCreated(res.data);
       setName('');
     } catch (err) {
@@ -18,15 +18,15 @@ const ChannelForm = ({ onChannelCreated }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form onSubmit={handleSubmit} className="channel-form">
       <input
         type="text"
         placeholder="New Channel Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="px-3 py-2 border rounded mr-2"
+        className="channel-input"
       />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      <button type="submit" className="channel-button">
         Create
       </button>
     </form>

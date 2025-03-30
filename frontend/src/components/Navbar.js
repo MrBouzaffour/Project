@@ -1,23 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import '../styles/Navbar.css';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
 
   return (
-    <nav className="bg-gray-800 text-white px-4 py-2 flex justify-between items-center">
-      <Link to="/" className="text-xl font-bold">Channel Tool</Link>
-      <div className="space-x-4">
+    <nav className="navbar">
+      <div className="navbar__left">
+        <Link to="/" className="navbar__brand">ChannelTool</Link>
+      </div>
+      <div className="navbar__right">
         {user ? (
           <>
-            <Link to="/home" className="hover:underline">Home</Link>
-            <button onClick={logout} className="bg-red-500 px-3 py-1 rounded hover:bg-red-600">Logout</button>
+            <Link to="/home" className="navbar__link">Home</Link>
+            <button onClick={logout} className="navbar__button">Logout</button>
           </>
         ) : (
           <>
-            <Link to="/login" className="hover:underline">Login</Link>
-            <Link to="/register" className="hover:underline">Register</Link>
+            <Link to="/login" className="navbar__link">Login</Link>
+            <Link to="/register" className="navbar__link">Register</Link>
           </>
         )}
       </div>

@@ -1,0 +1,71 @@
+.channel-list-wrapper {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .channel-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .channel-item {
+    margin-bottom: 0.75rem;
+    transition: background-color 0.2s ease;
+    border-radius: 6px;
+  }
+  
+  .channel-link {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .channel-link:hover {
+    background-color: #f0f2f5;
+  }
+  
+  .channel-icon {
+    color: #007bff;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+  }
+  
+
+  
+  .channel-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .channel-card {
+    background-color: #f3f4f6;
+    border-radius: 10px;
+    padding: 1rem;
+    text-decoration: none;
+    color: #111827;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease;
+  }
+  
+  .channel-card:hover {
+    background-color: #e5e7eb;
+  }
+  
+  .channel-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  

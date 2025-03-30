@@ -38,39 +38,39 @@ const ReplyThread = ({ parentId }) => {
   };
 
   return (
-    <div className="mt-6 ml-6">
-      <form onSubmit={handleSubmit} className="space-y-3">
+    <div className="reply-thread">
+      <form onSubmit={handleSubmit} className="reply-form">
         <textarea
           value={data}
           onChange={(e) => setData(e.target.value)}
           placeholder="Write a reply..."
-          className="w-full p-2 border rounded"
+          className="textarea"
         />
         <input
           type="file"
           onChange={(e) => setScreenshot(e.target.files[0])}
-          className="w-full"
+          className="file"
         />
         <button
           type="submit"
-          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+          className="btn-submit"
         >
           Reply
         </button>
       </form>
 
-      <div className="mt-4 space-y-3">
+      <div className="reply-list">
         {replies.map(reply => (
-          <div key={reply._id} className="p-3 border rounded bg-gray-50">
+          <div key={reply._id} className="reply-item">
             <p>{reply.data}</p>
             {reply.screenshot && (
               <img
                 src={reply.screenshot}
                 alt="Reply Screenshot"
-                className="mt-2 max-w-xs"
+                className="reply-img"
               />
             )}
-            <p className="text-sm text-gray-500">
+            <p className="timestamp">
               {new Date(reply.timestamp).toLocaleString()}
             </p>
           </div>

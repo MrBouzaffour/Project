@@ -5,7 +5,10 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
-
+const channelRoutes = require('./routes/channelRoutes');
+const messageRoutes = require('./routes/messageRoutes');
+const replyRoutes = require('./routes/replyRoutes');
+const dataRoutes = require('./routes/dataRoutes');
 
 const app = express();
 const port = 5000;
@@ -23,10 +26,12 @@ app.use((req, res, next) => {
 });
 
 // Routes
-//app.use('/channels', require('./routes/channelRoutes'));
+app.use('/channels', channelRoutes);
 //app.use('/messages', require('./routes/messageRoutes'));
 //app.use('/replies', require('./routes/replyRoutes'));
 app.use('/auth', authRoutes);
 //app.use('/data', require('./routes/dataRoutes'));
-
+app.use('/messages', messageRoutes);
+app.use('/replies', replyRoutes);
+app.use('/alldata', dataRoutes);
 app.listen(port, () => console.log(`🚀 Server running at http://localhost:${port}`));

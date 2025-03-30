@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import axios from '../api/api';
+import { fetchChannels } from '../api/api';
 import ChannelForm from '../components/ChannelForm';
 import ChannelList from '../components/ChannelList';
 
@@ -14,13 +14,13 @@ const HomePage = () => {
     if (!user) {
       navigate('/login');
     } else {
-      fetchChannels();
+      loadChannels();
     }
-}, [user, navigate]);
+  }, [user, navigate]);
 
-  const fetchChannels = async () => {
+  const loadChannels = async () => {
     try {
-      const res = await axios.get('/channels');
+      const res = await fetchChannels();
       setChannels(res.data);
     } catch (err) {
       console.error('Failed to fetch channels', err);
