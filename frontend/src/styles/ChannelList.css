@@ -1,71 +1,47 @@
-.channel-list-wrapper {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1rem;
-    background-color: white;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  
-  .channel-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .channel-item {
-    margin-bottom: 0.75rem;
-    transition: background-color 0.2s ease;
-    border-radius: 6px;
-  }
-  
-  .channel-link {
-    display: flex;
-    align-items: center;
-    padding: 0.6rem 1rem;
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
-  }
-  
-  .channel-link:hover {
-    background-color: #f0f2f5;
-  }
-  
-  .channel-icon {
-    color: #007bff;
-    font-size: 1.2rem;
-    margin-right: 0.5rem;
-  }
-  
+.channel-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  padding: 1.5rem 0;
+}
 
-  
-  .channel-list-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
-  }
-  
-  .channel-card {
-    background-color: #f3f4f6;
-    border-radius: 10px;
-    padding: 1rem;
-    text-decoration: none;
-    color: #111827;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: background-color 0.2s ease;
-  }
-  
-  .channel-card:hover {
-    background-color: #e5e7eb;
-  }
-  
-  .channel-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  
+.channel-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.2rem;
+  text-decoration: none;
+  color: #1f2937;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.channel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  background-color: #f9fafb;
+}
+
+.channel-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #2563eb;
+}
+
+.channel-description {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.no-channels {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #6b7280;
+  padding: 2rem 0;
+}

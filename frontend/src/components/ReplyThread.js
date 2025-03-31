@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/api';
+import '../styles/ReplyThread.css';
 
 const ReplyThread = ({ parentId }) => {
   const [replies, setReplies] = useState([]);
@@ -38,43 +39,46 @@ const ReplyThread = ({ parentId }) => {
   };
 
   return (
-    <div className="reply-thread">
-      <form onSubmit={handleSubmit} className="reply-form">
+    <div className="reply-thread-container">
+      <form onSubmit={handleSubmit} className="reply-form-box">
+        <h4 className="reply-title">Add Your Response</h4>
         <textarea
           value={data}
           onChange={(e) => setData(e.target.value)}
-          placeholder="Write a reply..."
-          className="textarea"
+          placeholder="Share your thoughts, explanations, or code snippet..."
+          className="reply-textarea"
         />
         <input
           type="file"
           onChange={(e) => setScreenshot(e.target.files[0])}
-          className="file"
+          className="reply-file"
         />
-        <button
-          type="submit"
-          className="btn-submit"
-        >
-          Reply
+        <button type="submit" className="reply-button">
+          Submit Reply
         </button>
       </form>
 
-      <div className="reply-list">
-        {replies.map(reply => (
-          <div key={reply._id} className="reply-item">
-            <p>{reply.data}</p>
-            {reply.screenshot && (
-              <img
-                src={reply.screenshot}
-                alt="Reply Screenshot"
-                className="reply-img"
-              />
-            )}
-            <p className="timestamp">
-              {new Date(reply.timestamp).toLocaleString()}
-            </p>
-          </div>
-        ))}
+      <div className="reply-list-section">
+        <h5 className="reply-list-heading">Responses</h5>
+        {replies.length === 0 ? (
+          <p className="no-replies">No replies yet. Be the first to respond!</p>
+        ) : (
+          replies.map(reply => (
+            <div key={reply._id} className="reply-card">
+              <p className="reply-text">{reply.data}</p>
+              {reply.screenshot && (
+                <img
+                  src={reply.screenshot}
+                  alt="Reply Screenshot"
+                  className="reply-screenshot"
+                />
+              )}
+              <p className="reply-timestamp">
+                {new Date(reply.timestamp).toLocaleString()}
+              </p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

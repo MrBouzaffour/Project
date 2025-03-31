@@ -30,4 +30,11 @@ export const postReply = (formData) => API.post('/replies', formData);
 // All Data (optional fallback)
 export const fetchAllData = () => API.get('/alldata');
 
+// Search content
+export const searchContent = (query) =>
+  API.get(`/explore/search?q=${encodeURIComponent(query)}`);
+
+// Get analytics
+export const fetchAnalytics = () =>
+  API.get('/explore/analytics');
 export default API;

@@ -27,11 +27,10 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/channels', channelRoutes);
-//app.use('/messages', require('./routes/messageRoutes'));
-//app.use('/replies', require('./routes/replyRoutes'));
 app.use('/auth', authRoutes);
-//app.use('/data', require('./routes/dataRoutes'));
 app.use('/messages', messageRoutes);
 app.use('/replies', replyRoutes);
 app.use('/alldata', dataRoutes);
-app.listen(port, () => console.log(`🚀 Server running at http://localhost:${port}`));
+const searchRoutes = require('./routes/searchRoutes');
+app.use('/explore', searchRoutes);
+app.listen(port, () => console.log(`Server running at http://localhost:${port}`));

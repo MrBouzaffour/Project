@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from '../api/api';
+import ChannelList from '../components/ChannelList';
+import '../styles/ChannelPage.css';
 
 const ChannelPage = () => {
   const { id } = useParams();
@@ -8,9 +10,11 @@ const ChannelPage = () => {
   const [topic, setTopic] = useState('');
   const [data, setData] = useState('');
   const [screenshot, setScreenshot] = useState(null);
+  const [allChannels, setAllChannels] = useState([]);
 
   useEffect(() => {
     fetchMessages();
+    fetchAllChannels();
   }, [id]);
 
   const fetchMessages = async () => {
@@ -20,6 +24,15 @@ const ChannelPage = () => {
       setMessages(channelMessages);
     } catch (err) {
       console.error('Error fetching messages', err);
+    }
+  };
+
+  const fetchAllChannels = async () => {
+    try {
+      const res = await axios.get('/channels');
+      setAllChannels(res.data);
+    } catch (err) {
+      console.error('Error fetching channels', err);
     }
   };
 
@@ -43,29 +56,62 @@ const ChannelPage = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Channel Messages</h2>
-      <form onSubmit={handleSubmit} className="space-y-3 mb-6">
-        <input type="text" placeholder="Topic" value={topic} onChange={e => setTopic(e.target.value)} className="w-full p-2 border rounded" />
-        <textarea placeholder="Message content" value={data} onChange={e => setData(e.target.value)} className="w-full p-2 border rounded"></textarea>
-        <input type="file" onChange={e => setScreenshot(e.target.files[0])} className="w-full" />
-        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">Post Message</button>
+    <div className="channel-container">
+      <h2 className="channel-title">Ask a Programming Question</h2>
+
+      <form onSubmit={handleSubmit} className="channel-form">
+        <input
+          type="text"
+          placeholder="Enter a brief topic"
+          value={topic}
+          onChange={(e) => setTopic(e.target.value)}
+          className="channel-input"
+        />
+        <textarea
+          placeholder="Describe your issue or question..."
+          value={data}
+          onChange={(e) => setData(e.target.value)}
+          className="channel-textarea"
+        ></textarea>
+        <input
+          type="file"
+          onChange={(e) => setScreenshot(e.target.files[0])}
+          className="channel-file"
+        />
+        <button type="submit" className="channel-submit">Post Message</button>
       </form>
 
+      <h3 className="channel-messages-title">Recent Questions</h3>
       {messages.length === 0 ? (
-        <p>No messages yet.</p>
+        <p className="channel-no-msg">No messages yet. Be the first to post!</p>
       ) : (
-        <ul className="space-y-4">
-          {messages.map(msg => (
-            <li key={msg._id} className="border p-3 rounded shadow">
-              <h3 className="font-semibold">{msg.topic}</h3>
-              <p>{msg.data}</p>
-              {msg.screenshot && <img src={msg.screenshot} alt="screenshot" className="mt-2 max-w-xs" />}
-              <p className="text-sm text-gray-500">{new Date(msg.timestamp).toLocaleString()}</p>
-            </li>
+        <div className="channel-message-list">
+          {messages.map((msg) => (
+            <div key={msg._id} className="channel-message-card">
+              <h4 className="channel-msg-title">{msg.topic}</h4>
+              <p className="channel-msg-content">{msg.data}</p>
+              {msg.screenshot && (
+                <img
+                  src={msg.screenshot}
+                  alt="screenshot"
+                  className="channel-img"
+                />
+              )}
+              <div className="channel-message-footer">
+                <p className="channel-msg-time">
+                  Posted at {new Date(msg.timestamp).toLocaleString()}
+                </p>
+                <Link to={`/thread/${msg._id}`} className="channel-msg-link">
+                  View Thread →
+                </Link>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
+
+      <h3 className="channel-messages-title">Explore Other Channels</h3>
+      <ChannelList channels={allChannels} />
     </div>
   );
 };

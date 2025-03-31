@@ -1,3 +1,5 @@
+const getDB = require('./couch');
+
 exports.insertReply = async ({ parentId, data, screenshot }) => {
     const db = await getDB();
     const doc = {

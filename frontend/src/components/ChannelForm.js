@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createChannel } from '../api/api';
+import '../styles/ChannelForm.css';
 
 const ChannelForm = ({ onChannelCreated }) => {
   const [name, setName] = useState('');
@@ -21,13 +22,13 @@ const ChannelForm = ({ onChannelCreated }) => {
     <form onSubmit={handleSubmit} className="channel-form">
       <input
         type="text"
-        placeholder="New Channel Name"
+        placeholder="# Enter channel name"
         value={name}
         onChange={(e) => setName(e.target.value)}
         className="channel-input"
       />
       <button type="submit" className="channel-button">
-        Create
+        ➕ Create Channel
       </button>
     </form>
   );

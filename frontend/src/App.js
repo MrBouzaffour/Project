@@ -15,6 +15,7 @@ import LandingPage from './pages/LandingPage';
 import Navbar from './components/Navbar';
 import ChannelPage from './pages/ChannelPage';
 import ThreadPage from './pages/ThreadPage';
+import SearchPage from './pages/SearchPage';
 import './styles/styles.css';
 
 const PrivateRoute = ({ children }) => {
@@ -69,7 +70,14 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-
+        <Route
+          path="/search"
+          element={
+            <PrivateRoute>
+              <SearchPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>

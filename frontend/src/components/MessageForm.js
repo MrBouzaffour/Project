@@ -26,22 +26,29 @@ const MessageForm = ({ channelId, onMessageSent }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="message-form">
+    <form onSubmit={handleSubmit} className="message-form-container">
+      <h3 className="message-form-title">Ask a Question</h3>
       <input
         type="text"
-        placeholder="Topic"
+        placeholder="Enter a clear, concise topic"
         value={topic}
         onChange={(e) => setTopic(e.target.value)}
-        className="input"
+        className="message-form-input"
       />
       <textarea
-        placeholder="Message..."
+        placeholder="Describe your problem or question..."
         value={data}
         onChange={(e) => setData(e.target.value)}
-        className="textarea"
+        className="message-form-textarea"
       ></textarea>
-      <input type="file" onChange={(e) => setScreenshot(e.target.files[0])} className="file" />
-      <button type="submit" className="btn-submit">Post</button>
+      <input
+        type="file"
+        onChange={(e) => setScreenshot(e.target.files[0])}
+        className="message-form-file"
+      />
+      <button type="submit" className="message-form-button">
+        Post Question
+      </button>
     </form>
   );
 };
