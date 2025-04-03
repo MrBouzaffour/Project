@@ -23,9 +23,7 @@ export default function LoginPage() {
 
     try {
       const data = await loginUser(email, password);
-      console.log('LoginPage: backend response =', data);
-      login(data.token, data.user); // This triggers redirect via `useEffect`
-    
+      login(data.token, data.user);
     } catch (err) {
       const errMsg = err.response?.data?.error || 'Login failed.';
       setMessage({ type: 'error', text: errMsg });
@@ -33,16 +31,9 @@ export default function LoginPage() {
   };
 
   return (
-    <AuthForm title="Login" onSubmit={handleSubmit}>
+    <AuthForm title="Welcome Back" subtitle="Log in to post and answer programming questions" onSubmit={handleSubmit}>
       {message && (
-        <div
-          style={{
-            color: message.type === 'error' ? 'red' : 'green',
-            marginBottom: '10px',
-          }}
-        >
-          {message.text}
-        </div>
+        <div className={`alert ${message.type}`}>{message.text}</div>
       )}
       <input
         type="email"

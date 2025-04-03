@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -34,64 +33,24 @@ const AppRoutes = () => {
       {shouldShowNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
-
-        <Route
-          path="/register"
-          element={user ? <Navigate to="/home" /> : <RegisterPage />}
-        />
-        <Route
-          path="/login"
-          element={user ? <Navigate to="/home" /> : <LoginPage />}
-        />
-
-        <Route
-          path="/home"
-          element={
-            <PrivateRoute>
-              <HomePage />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/channel/:id"
-          element={
-            <PrivateRoute>
-              <ChannelPage />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/thread/:id"
-          element={
-            <PrivateRoute>
-              <ThreadPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <PrivateRoute>
-              <SearchPage />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/register" element={user ? <Navigate to="/home" /> : <RegisterPage />} />
+        <Route path="/login" element={user ? <Navigate to="/home" /> : <LoginPage />} />
+        <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
+        <Route path="/channel/:id" element={<PrivateRoute><ChannelPage /></PrivateRoute>} />
+        <Route path="/thread/:id" element={<PrivateRoute><ThreadPage /></PrivateRoute>} />
+        <Route path="/search" element={<PrivateRoute><SearchPage /></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );
 };
 
-const App = () => {
-  return (
-    <AuthProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </AuthProvider>
-  );
-};
+const App = () => (
+  <AuthProvider>
+    <Router>
+      <AppRoutes />
+    </Router>
+  </AuthProvider>
+);
 
 export default App;

@@ -23,10 +23,10 @@ export default function RegisterPage() {
   };
 
   return (
-    <AuthForm title="Register" onSubmit={handleSubmit}>
-      <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+    <AuthForm title="Create an Account" subtitle="Join a community of developers helping each other" onSubmit={handleSubmit}>
+      <input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required />
+      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       <button type="submit">Register</button>
     </AuthForm>
   );
