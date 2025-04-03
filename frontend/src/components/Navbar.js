@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar__container">
-        <Link to="/" className="navbar__brand">💻 ChannelTool</Link>
+        <Link to="/" className="navbar__brand">CF</Link>
 
         <div className="navbar__menu">
           {user ? (
