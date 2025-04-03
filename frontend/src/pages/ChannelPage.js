@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from '../api/api';
 import ChannelList from '../components/ChannelList';
+import { useAuth } from '../context/AuthContext'; // ✅ Add this
 import '../styles/ChannelPage.css';
 
 const ChannelPage = () => {
   const { id } = useParams();
+  const { user } = useAuth(); // ✅ Use user context
   const [messages, setMessages] = useState([]);
   const [topic, setTopic] = useState('');
   const [data, setData] = useState('');
@@ -43,6 +45,12 @@ const ChannelPage = () => {
     formData.append('topic', topic);
     formData.append('data', data);
     if (screenshot) formData.append('screenshot', screenshot);
+
+    // ✅ Append user identity
+    if (user) {
+      formData.append('userId', user._id);
+      formData.append('username', user.name);
+    }
 
     try {
       await axios.post('/messages', formData);
@@ -99,7 +107,7 @@ const ChannelPage = () => {
               )}
               <div className="channel-message-footer">
                 <p className="channel-msg-time">
-                  Posted at {new Date(msg.timestamp).toLocaleString()}
+                  Posted by {msg.username || 'Unknown'} at {new Date(msg.timestamp).toLocaleString()}
                 </p>
                 <Link to={`/thread/${msg._id}`} className="channel-msg-link">
                   View Thread →

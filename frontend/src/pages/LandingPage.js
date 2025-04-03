@@ -5,11 +5,15 @@ import '../styles/LandingPage.css';
 const LandingPage = () => {
   return (
     <div className="landing-wrapper">
+      <header className="site-header">
+        <h2>CodeForm</h2>
+      </header>
+
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">Build, Share, and Solve</h1>
           <p className="hero-subtitle">
-            DevDiscuss is your hub to post programming questions and offer real answers.
+            CodeForm is your hub to post programming questions and offer real answers.
             Collaborate with a growing developer community today.
           </p>
           <div className="hero-buttons">

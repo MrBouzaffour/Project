@@ -16,6 +16,7 @@ import ChannelPage from './pages/ChannelPage';
 import ThreadPage from './pages/ThreadPage';
 import SearchPage from './pages/SearchPage';
 import './styles/styles.css';
+import MyPostsPage from './pages/MyPostsPage';
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
@@ -39,6 +40,8 @@ const AppRoutes = () => {
         <Route path="/channel/:id" element={<PrivateRoute><ChannelPage /></PrivateRoute>} />
         <Route path="/thread/:id" element={<PrivateRoute><ThreadPage /></PrivateRoute>} />
         <Route path="/search" element={<PrivateRoute><SearchPage /></PrivateRoute>} />
+        <Route path="/myposts" element={<PrivateRoute><MyPostsPage /></PrivateRoute>}/>
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>

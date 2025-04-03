@@ -1,16 +1,13 @@
 import React from 'react';
 import '../styles/AuthForm.css';
 
-const AuthForm = ({ title, subtitle, children, onSubmit }) => {
+const AuthForm = ({ title, children, onSubmit }) => {
   return (
-    <div className="auth-container">
-      <div className="auth-box">
+    <div className="auth-page-wrapper">
+      <form className="auth-form" onSubmit={onSubmit}>
         <h2 className="auth-title">{title}</h2>
-        {subtitle && <p className="auth-subtitle">{subtitle}</p>}
-        <form onSubmit={onSubmit} className="auth-form">
-          {children}
-        </form>
-      </div>
+        {children}
+      </form>
     </div>
   );
 };

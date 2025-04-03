@@ -15,6 +15,7 @@ const Navbar = () => {
           {user ? (
             <>
               <Link to="/home" className="navbar__link">Home</Link>
+              <Link to="/myposts" className="navbar__link">Profile</Link>
               <Link to="/search" className="navbar__link">Search</Link>
               <button onClick={logout} className="navbar__button">Logout</button>
             </>

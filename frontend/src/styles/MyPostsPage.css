@@ -1,0 +1,180 @@
+.myposts-wrapper {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  
+  .myposts-title {
+    font-size: 2rem;
+    text-align: center;
+    color: #1e3a8a;
+    margin-bottom: 2rem;
+  }
+  
+  .user-info-card {
+    background: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .user-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .user-email {
+    color: #6b7280;
+    font-size: 0.95rem;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 1rem;
+  }
+  
+  .posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .post-card {
+    background: #fff;
+    border-left: 4px solid #3b82f6;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-topic {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1e3a8a;
+  }
+  
+  .post-content {
+    margin: 0.5rem 0;
+    color: #374151;
+  }
+  
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 1rem;
+  }
+  
+  .post-controls {
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  .link-view,
+  .link-edit,
+  .link-delete {
+    color: #2563eb;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .link-edit {
+    color: #d97706;
+  }
+  
+  .link-delete {
+    color: #dc2626;
+  }
+  
+  .link-view:hover,
+  .link-edit:hover,
+  .link-delete:hover {
+    text-decoration: underline;
+  }
+  
+  .post-edit-input {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    resize: vertical;
+  }
+  
+  .post-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+  
+  .btn-save,
+  .btn-cancel {
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .btn-save {
+    background: #10b981;
+    color: white;
+  }
+  
+  .btn-save:hover {
+    background: #059669;
+  }
+  
+  .btn-cancel {
+    background: #9ca3af;
+    color: white;
+  }
+  
+  .btn-cancel:hover {
+    background: #6b7280;
+  }
+  .pill-button {
+    padding: 6px 14px;
+    font-size: 0.875rem;
+    border: none;
+    border-radius: 9999px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .pill-button.edit {
+    background-color: #facc15; /* yellow-400 */
+    color: #1f2937;
+  }
+  
+  .pill-button.edit:hover {
+    background-color: #eab308; /* yellow-500 */
+  }
+  
+  .pill-button.delete {
+    background-color: #ef4444;
+    color: #fff;
+  }
+  
+  .pill-button.delete:hover {
+    background-color: #dc2626;
+  }
+  
