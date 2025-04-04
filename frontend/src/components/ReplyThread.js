@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/api';
+import RatingButtons from './RatingButtons';
 import '../styles/ReplyThread.css';
+import { useAuth } from '../context/AuthContext';
 
 const ReplyThread = ({ parentId }) => {
+  const { user } = useAuth();
   const [replies, setReplies] = useState([]);
   const [data, setData] = useState('');
   const [screenshot, setScreenshot] = useState(null);
@@ -27,6 +30,10 @@ const ReplyThread = ({ parentId }) => {
     formData.append('parentId', parentId);
     formData.append('data', data);
     if (screenshot) formData.append('screenshot', screenshot);
+    if (user) {
+      formData.append('userId', user._id);
+      formData.append('username', user.name);
+    }
 
     try {
       await axios.post('/replies', formData);
@@ -76,6 +83,15 @@ const ReplyThread = ({ parentId }) => {
               <p className="reply-timestamp">
                 {new Date(reply.timestamp).toLocaleString()}
               </p>
+              <RatingButtons
+                targetId={message._id}
+                targetType="message"
+                initialLikes={message.likes || 0}
+                initialDislikes={message.dislikes || 0}
+                userVotes={message.userVotes || {}}
+                currentUserId={user._id}
+              />
+                          
             </div>
           ))
         )}

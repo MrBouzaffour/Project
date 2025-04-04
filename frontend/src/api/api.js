@@ -35,9 +35,15 @@ export const postMessageWithUser = (formData, user) => {
   }
   return postMessage(formData);
 };
+export const voteOnContent = (targetType, targetId, voteType, userId) => {
+  const route = targetType === 'reply' ? 'replies' : `${targetType}s`;
+  return API.put(`/${route}/${targetId}/${voteType}`, { userId }); // 👈 Important!
+};
 
-export const voteOnContent = (targetType, targetId, voteType) =>
-  API.put(`/${targetType}s/${targetId}/${voteType}`);
+
+
+
+
 
 // All Data
 export const fetchAllData = () => API.get('/alldata');

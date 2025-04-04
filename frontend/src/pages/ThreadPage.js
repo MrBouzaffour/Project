@@ -3,9 +3,12 @@ import { useParams } from 'react-router-dom';
 import axios from '../api/api';
 import RatingButtons from '../components/RatingButtons';
 import NestedReplies from '../components/NestedReplies';
+import { useAuth } from '../context/AuthContext';
 import '../styles/ThreadPage.css';
 
+
 const ThreadPage = () => {
+  const { user } = useAuth();
   const { id } = useParams();
   const [message, setMessage] = useState(null);
   const [replies, setReplies] = useState([]);
@@ -56,7 +59,15 @@ const ThreadPage = () => {
       <div className="thread-main-message">
         <p>{message.data}</p>
         {message.screenshot && <img src={message.screenshot} alt="screenshot" />}
-        <RatingButtons targetId={message._id} targetType="message" />
+        <RatingButtons
+          targetId={message._id}
+          targetType="message"
+          initialLikes={message.likes || 0}
+          initialDislikes={message.dislikes || 0}
+          userVotes={message.userVotes || {}}
+          currentUserId={user._id}
+        />
+
         <p className="timestamp">Posted at {new Date(message.timestamp).toLocaleString()}</p>
       </div>
 

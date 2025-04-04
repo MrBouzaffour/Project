@@ -9,7 +9,8 @@ router.post('/', (req, res, next) => req.upload.single('screenshot')(req, res, (
 router.get('/user/:userId', getMessagesByUser);
 
 router.put('/:id/like', likeMessage);
-router.put('/:id/dislike', dislikeMessage)
+router.put('/:id/dislike', dislikeMessage);
+
 
 router.put('/:id', updateMessage);
 router.delete('/:id', deleteMessage);
