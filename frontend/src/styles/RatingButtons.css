@@ -1,0 +1,43 @@
+/* === File: RatingButtons.css === */
+.rating-buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  
+  .rating-btn {
+    padding: 6px 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  
+  .rating-btn.like {
+    background-color: #10b981;
+    color: white;
+  }
+  
+  .rating-btn.like:hover {
+    background-color: #059669;
+  }
+  
+  .rating-btn.dislike {
+    background-color: #ef4444;
+    color: white;
+  }
+  
+  .rating-btn.dislike:hover {
+    background-color: #dc2626;
+  }
+  
+  .rating-btn.active {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
+  }
+  

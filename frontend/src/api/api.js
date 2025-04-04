@@ -36,6 +36,9 @@ export const postMessageWithUser = (formData, user) => {
   return postMessage(formData);
 };
 
+export const voteOnContent = (targetType, targetId, voteType) =>
+  API.put(`/${targetType}s/${targetId}/${voteType}`);
+
 // All Data
 export const fetchAllData = () => API.get('/alldata');
 
@@ -48,5 +51,7 @@ export const fetchAnalytics = () => API.get('/explore/analytics');
 export const getMyPosts = (userId) => API.get(`/messages/user/${userId}`);
 export const updateMessage = (id, data) => API.put(`/messages/${id}`, { data });
 export const deleteMessage = (id) => API.delete(`/messages/${id}`);
+
+
 
 export default API;

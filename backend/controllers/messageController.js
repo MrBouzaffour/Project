@@ -1,5 +1,5 @@
 const getDB = require('../models/couch');
-const { insertMessage, fetchMessagesByUserId } = require('../models/messageModel');
+const { insertMessage, fetchMessagesByUserId, likeMessage, dislikeMessage } = require('../models/messageModel');
 
 exports.postMessage = async (req, res) => {
   try {
@@ -50,5 +50,24 @@ exports.deleteMessage = async (req, res) => {
   } catch (err) {
     console.error('Error deleting message:', err);
     res.status(500).json({ error: 'Failed to delete message' });
+  }
+};
+exports.likeMessage = async (req, res) => {
+  try {
+    const result = await likeMessage(req.params.id);
+    res.json(result);
+  } catch (err) {
+    console.error('Error liking message:', err);
+    res.status(500).json({ error: 'Failed to like message' });
+  }
+};
+
+exports.dislikeMessage = async (req, res) => {
+  try {
+    const result = await dislikeMessage(req.params.id);
+    res.json(result);
+  } catch (err) {
+    console.error('Error disliking message:', err);
+    res.status(500).json({ error: 'Failed to dislike message' });
   }
 };

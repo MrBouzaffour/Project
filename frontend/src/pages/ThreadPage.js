@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from '../api/api';
+import RatingButtons from '../components/RatingButtons';
+import NestedReplies from '../components/NestedReplies';
 import '../styles/ThreadPage.css';
 
 const ThreadPage = () => {
@@ -54,6 +56,7 @@ const ThreadPage = () => {
       <div className="thread-main-message">
         <p>{message.data}</p>
         {message.screenshot && <img src={message.screenshot} alt="screenshot" />}
+        <RatingButtons targetId={message._id} targetType="message" />
         <p className="timestamp">Posted at {new Date(message.timestamp).toLocaleString()}</p>
       </div>
 
@@ -66,7 +69,9 @@ const ThreadPage = () => {
             <li key={reply._id} className="reply-item">
               <p>{reply.data}</p>
               {reply.screenshot && <img src={reply.screenshot} alt="screenshot" />}
+              <RatingButtons targetId={reply._id} targetType="reply" />
               <p className="timestamp">{new Date(reply.timestamp).toLocaleString()}</p>
+              <NestedReplies parentId={reply._id} />
             </li>
           ))}
         </ul>

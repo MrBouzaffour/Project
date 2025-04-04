@@ -9,6 +9,7 @@ const channelRoutes = require('./routes/channelRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const replyRoutes = require('./routes/replyRoutes');
 const dataRoutes = require('./routes/dataRoutes');
+const searchRoutes = require('./routes/searchRoutes');
 
 const app = express();
 const port = 5000;
@@ -26,11 +27,11 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/channels', channelRoutes);
 app.use('/auth', authRoutes);
-app.use('/messages', messageRoutes);
-app.use('/replies', replyRoutes);
+app.use('/channels', channelRoutes);
+app.use('/messages', messageRoutes);   // includes PUT /:id/like & /:id/dislike
+app.use('/replies', replyRoutes);      // includes PUT /:id/like & /:id/dislike
 app.use('/alldata', dataRoutes);
-const searchRoutes = require('./routes/searchRoutes');
 app.use('/explore', searchRoutes);
+
 app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
