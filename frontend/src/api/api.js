@@ -21,7 +21,7 @@ export const fetchUserProfile = (token) =>
 
 // Channels
 export const fetchChannels = () => API.get('/channels');
-export const createChannel = (name) => API.post('/channels', { name });
+export const createChannel = (name, description) => API.post('/channels', { name, description });
 
 // Messages / Replies
 export const postMessage = (formData) => API.post('/messages', formData);

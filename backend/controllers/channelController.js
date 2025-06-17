@@ -11,11 +11,11 @@ exports.getAllChannels = async (req, res) => {
 };
 
 exports.createChannel = async (req, res) => {
-  const { name } = req.body;
+  const { name, description } = req.body;
   if (!name) return res.status(400).json({ error: 'Name is required' });
 
   try {
-    const newChannel = await insertChannel(name);
+    const newChannel = await insertChannel(name, description || '');
     res.status(201).json(newChannel);
   } catch (err) {
     console.error('Error creating channel:', err);

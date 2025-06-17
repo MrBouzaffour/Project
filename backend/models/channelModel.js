@@ -6,12 +6,13 @@ exports.fetchAllChannels = async () => {
   return result.docs;
 };
 
-exports.insertChannel = async (name) => {
+exports.insertChannel = async (name,description) => {
   const db = await getDB();
   const doc = {
     _id: `channel:${Date.now()}`, 
     type: 'channel',
     name,
+    description: description || '',
     createdAt: new Date().toISOString(),
   };
   const response = await db.insert(doc);

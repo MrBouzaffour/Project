@@ -12,7 +12,7 @@ const ChannelList = ({ channels }) => {
       {channels.map((ch) => (
         <Link key={ch._id} to={`/channel/${ch._id}`} className="channel-card">
           <h3 className="channel-name">#{ch.name}</h3>
-          <p className="channel-description">Discuss coding topics, ask questions, and get answers.</p>
+          <p className="channel-description">{ch.description || "No description provided."}</p>
         </Link>
       ))}
     </div>
